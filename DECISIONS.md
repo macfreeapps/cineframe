@@ -1,0 +1,13 @@
+# Implementation decisions
+
+- Kept the pipeline ratios and “never upscale / never modify originals” requirements unchanged.
+- The geometry engine uses integer top-left pixel rectangles and one centralized pair of ratios. Parity is fixed by changing crop height by one pixel, selecting the valid height nearest the ideal ratio; if the source is odd-sized, the crop is re-centered with integer rounding.
+- The brief’s tiny-image ratio assertion is not achievable together with its maximum-width rule. For 100×80, the prescribed crop is 100×42 and its 16:9 canvas is 100×56; integer ratios miss ±0.002. Tests still check bounds, integer geometry, output width, and symmetric bars for this case, and check the ratio tolerances on the other requested dimensions.
+- Full-resolution EXIF orientation is applied by ImageIO’s transformed thumbnail API with a maximum dimension equal to the source’s long edge; preview creation uses the same transform capped at 2048 pixels. Export never uses the preview.
+- Smart crop uses Vision’s attention saliency boxes on the downsampled preview and falls back to center if the request fails or returns no boxes.
+- RAW outputs default to TIFF and use `CIRAWFilter` defaults. HEIC/JPEG can be selected explicitly. WebP, GIF, and BMP use their first decodable image and default to PNG only when the decoded image has alpha.
+- TIFF compression is requested as LZW. The renderer attempts the source color space, component depth, grayscale model, alpha, and float format. If Core Graphics cannot create a context in the source space, it uses sRGB; unsupported bit depths are reduced to the nearest supported 8-bit context.
+- Metadata writing combines a mutable `CGImageMetadata` copy with the source ImageIO property dictionaries. Geometry, orientation, software, dates, custom XMP, and a derived history event are updated. Auxiliary images, stale face regions, and SubjectArea are removed. The custom XMP namespace is `http://ns.cineframe.app/1.0/`.
+- A security-scoped bookmark is saved per original directory for Next to original, and one app-scoped bookmark is used for a custom output directory. If access is unavailable or declined, the UI reports the fallback to Pictures/CineFrame.
+- Metadata behavior was tested with generated PNGs and in-memory XMP in this workspace. No representative phone, camera, Lightroom, or RAW sample assets were available; proprietary MakerNotes remain best-effort and must be checked with `Scripts/verify_metadata.sh` on those inputs.
+- Real-world acceptance checks for 50-photo batches, cancellation under load, Dock drops, memory use, and Finder/Photos import are not simulated by the unit tests. These require fixture files and interactive acceptance testing on a signed sandboxed build.

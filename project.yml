@@ -1,0 +1,42 @@
+name: CineFrame
+options:
+  bundleIdPrefix: app.cineframe
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    SWIFT_STRICT_CONCURRENCY: complete
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    ENABLE_HARDENED_RUNTIME: YES
+    CODE_SIGN_ENTITLEMENTS: CineFrame/Resources/CineFrame.entitlements
+  configs:
+    Debug:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+targets:
+  CineFrame:
+    type: application
+    platform: macOS
+    sources:
+      - path: CineFrame
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.cineframe.CineFrame
+        MARKETING_VERSION: 1.0.0
+        CURRENT_PROJECT_VERSION: 1
+        INFOPLIST_FILE: CineFrame/Resources/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_APP_SANDBOX: YES
+        CODE_SIGN_ENTITLEMENTS: CineFrame/Resources/CineFrame.entitlements
+  CineFrameTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: CineFrame
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.cineframe.CineFrameTests

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>CineFrame</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>CineFrame</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.photography</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.image</string>
+				<string>com.adobe.raw-image</string>
+			</array>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key><string>com.adobe.raw-image</string>
+			<key>UTTypeDescription</key><string>Camera RAW Image</string>
+			<key>UTTypeConformsTo</key><array><string>public.image</string></array>
+			<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>3fr</string><string>ari</string><string>arw</string><string>bay</string><string>cap</string><string>cr2</string><string>cr3</string><string>dcs</string><string>dcr</string><string>dng</string><string>drf</string><string>eip</string><string>erf</string><string>fff</string><string>gpr</string><string>iiq</string><string>k25</string><string>kdc</string><string>mdc</string><string>mef</string><string>mos</string><string>mrw</string><string>nef</string><string>nrw</string><string>obm</string><string>orf</string><string>ori</string><string>pef</string><string>ptx</string><string>pxn</string><string>raf</string><string>raw</string><string>rwl</string><string>rw2</string><string>rwz</string><string>srw</string><string>sti</string><string>x3f</string></array></dict>
+		</dict>
+	</array>
+</dict>
+</plist>
